@@ -1,0 +1,1 @@
+This project is a template for all of my git projects. I use make for just about everything and this project assumes that  all contributors try to merge to the default branch hourly. I have some handy make commands to support that.  I also have a make rebase target to help users who need to keep a feature branch alive longer than that. 
