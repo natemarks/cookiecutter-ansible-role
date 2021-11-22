@@ -1,6 +1,5 @@
 .DEFAULT_GOAL := help
 DEFAULT_BRANCH := main
-ROLE_DIR := $(shell basename $(CURDIR))
 
 # Determine this makefile's path.
 # Be sure to place this BEFORE `include` directives, if any.
@@ -8,8 +7,7 @@ THIS_FILE := $(lastword $(MAKEFILE_LIST))
 VERSION := 0.0.0
 #  use the long commit id
 COMMIT := $(shell git rev-parse HEAD)
-
-
+#DEFAULT_BRANCH := $(shell git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@')
 
 help: ## Show this help.
 	@fgrep -h "##" $(MAKEFILE_LIST) | fgrep -v fgrep | sed -e 's/\\$$//' | sed -e 's/##//'
@@ -19,8 +17,44 @@ clean-venv: ## re-create virtual env
 	python3 -m venv .venv
 	( \
        . .venv/bin/activate; \
-       pip install -r requirements.txt; \
+       pip install --upgrade pip setuptools pylint flake8 pytest pytest-testinfra; \
     )
+
+clean-ansible: ## delete the $HOME/.ansible directory including galaxy-installed roles
+	@rm -rf $${HOME}/.ansible
+
+
+roles:  clean-venv ## install ansible roles from galaxy
+	( \
+       . .venv/bin/activate; \
+       ansible-galaxy install -r ansible_requirements.yml; \
+       ansible-galaxy install git+https://github.com/natemarks/ansible-role-shell.git,$(VERSION); \
+    )
+
+molecule-test: ## Run molecule
+	( \
+	   . .venv/bin/activate; \
+	   pip install ansible yamllint ansible-lint molecule \
+		 molecule-docker molecule-ec2; \
+		 bash scripts/generate_env.sh; \
+	   . ./.env && molecule test; \
+    )
+
+molecule-converge: ## Run molecule
+	( \
+	   . .venv/bin/activate; \
+	   pip install ansible yamllint ansible-lint molecule \
+		 molecule-docker molecule-ec2; \
+		 bash scripts/generate_env.sh; \
+	   . ./.env && molecule converge; \
+    )
+
+shellcheck: ## execute shellcheck
+	   shellcheck templates/*.sh
+	   shellcheck templates/*.local
+
+lint: shellcheck
+
 
 git-status: ## require status is clean so we can use undo_edits to put things back
 	@status=$$(git status --porcelain); \
@@ -36,18 +70,6 @@ undo_edits: ## undo staged and unstaged change. ohmyzsh alias: grhh
 rebase: git-status ## rebase current feature branch on to the default branch
 	git fetch && git rebase origin/$(DEFAULT_BRANCH)
 
-test: git-status static ## Run all project tests
-	( \
-       . .venv/bin/activate; \
-       python3 -m pytest -o log_cli=true -v test; \
-    )
-
-static: ## run  all of the static checks
-	( \
-       . .venv/bin/activate; \
-       pylint test/*.py; \
-    )
-
 bump: ## bump version in main branch
 ifeq ($(CURRENT_BRANCH), $(MAIN_BRANCH))
 	( \
@@ -59,18 +81,5 @@ else
 	@echo "UNABLE TO BUMP - not on Main branch"
 	$(info Current Branch: $(CURRENT_BRANCH), main: $(MAIN_BRANCH))
 endif
-
-run: ## run cookiecutter into a temp directory
-	TD=$$(mktemp -d); \
-	echo $$TD; \
-	( \
-       . .venv/bin/activate; \
-			 cookiecutter . -o $$TD; \
-			 RD=$$(ls $$TD); \
-			 git -C $$TD/$$RD init .; \
-			 git -C $$TD/$$RD add -A; \
-			 git -C $$TD/$$RD commit -am.; \
-			 tree $$TD; \
-    )
 
 .PHONY: static shellcheck test
