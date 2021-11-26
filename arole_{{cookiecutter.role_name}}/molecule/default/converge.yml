@@ -9,4 +9,4 @@
       changed_when: false
 
   roles:
-    - role: {{ cookiecutter.github_user }}.{{ cookiecutter.role_name }}
+    - role: "{{ cookiecutter.github_user }}.{{ cookiecutter.role_name }}"
