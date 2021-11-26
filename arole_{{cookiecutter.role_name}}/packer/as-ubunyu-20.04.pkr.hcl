@@ -1,5 +1,5 @@
 source "amazon-ebs" "ubuntu" {
-  ami_name      = "ansible-test-arole_{{ cookiecutter.role_name }}"
+  ami_name      = "ansible-test-arole_{{ cookiecutter.role_name }}-{{timestamp}"
   instance_type = "t2.micro"
   region        = "us-east-1"
   vpc_id = "{{ cookiecutter.vpc_id }}"
@@ -19,11 +19,20 @@ source "amazon-ebs" "ubuntu" {
 }
 
 build {
-  name    = "ansible-test-arole_{{ cookiecutter.role_name }}"
+  ami_name    = "ansible-test-arole_{{ cookiecutter.role_name }}"
+
+  tags = {
+    Name           = "aware_${var.version}"
+    OS_Version     = "Amazon Linux 2"
+    Runner         = "EC2"
+    Service        = "${var.service}"
+    ServiceVersion = "${var.service_version}"
+    AMIVersion     = "${var.version}"
+  }
   sources = [
     "source.amazon-ebs.ubuntu"
   ]
-  provisioner "refersh apt packages" {
+  provisioner "refresh apt packages" {
     inline = [
       "sudo apt-get update"
       ]
