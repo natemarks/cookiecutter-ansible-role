@@ -23,9 +23,13 @@ build {
   sources = [
     "source.amazon-ebs.ubuntu"
   ]
+  provisioner "refersh apt packages" {
+    inline = [
+      "sudo apt-get update"
+      ]
+}
   provisioner "shell" {
     inline = [
-      "sudo apt-get update",
       "sudo apt install -y ubuntu-desktop",
       "sudo apt install -y gnome-panel gnome-settings-daemon metacity nautilus gnome-terminal"
       ]
