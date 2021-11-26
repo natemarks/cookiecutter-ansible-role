@@ -7,5 +7,7 @@
   "ansible_lint_version": "5.1.2",
   "galaxy_tag_1": "example_tag1",
   "galaxy_tag_2": "example_tag2",
-  "galaxy_tag_3": "example_tag3"
+  "galaxy_tag_3": "example_tag3",
+  "vpc_id": "vpc_xxx",
+  "subnet_id": "subnet-xxx"
 }
