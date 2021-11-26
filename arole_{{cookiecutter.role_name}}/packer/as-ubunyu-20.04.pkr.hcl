@@ -1,5 +1,5 @@
 source "amazon-ebs" "ubuntu" {
-  ami_name      = "ansible-test-arole_{{ cookiecutter.role_name }}-{{timestamp}"
+  ami_name      = "ansible-test-arole_{{ cookiecutter.role_name }}-{{timestamp}}"
   instance_type = "t2.micro"
   region        = "us-east-1"
   vpc_id = "{{ cookiecutter.vpc_id }}"
