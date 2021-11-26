@@ -1,0 +1,26 @@
+---
+
+dependency:
+  name: galaxy
+driver:
+  name: ec2
+platforms:
+- name: test-instance
+  image: {{ cookiecutter.ami_id }} # standard linux AMI
+  instance_type: t2.micro
+  vpc_subnet_id: {{ cookiecutter.subnet_id}}
+provisioner:
+  name: ansible
+  # read app_secure_token and user_email from env vars
+  ansible_args:
+    - --extra-vars=app_secure_token=${APP_SECURE_TOKEN}
+    - --extra-vars=user_email=${USER_EMAIL}
+  inventory:
+    links:
+      hosts: hosts
+      group_vars: group_vars/
+      host_vars: host_vars/
+verifier:
+  name: testinfra
+  lint:
+    name: flake8
