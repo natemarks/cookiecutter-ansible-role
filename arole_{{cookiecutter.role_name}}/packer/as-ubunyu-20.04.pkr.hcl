@@ -19,28 +19,12 @@ source "amazon-ebs" "ubuntu" {
 }
 
 build {
-  ami_name    = "ansible-test-arole_{{ cookiecutter.role_name }}"
+  name    = "ansible-test-arole_{{ cookiecutter.role_name }}"
 
-  tags = {
-    Name           = "aware_${var.version}"
-    OS_Version     = "Amazon Linux 2"
-    Runner         = "EC2"
-    Service        = "${var.service}"
-    ServiceVersion = "${var.service_version}"
-    AMIVersion     = "${var.version}"
-  }
   sources = [
     "source.amazon-ebs.ubuntu"
   ]
-  provisioner "refresh apt packages" {
-    inline = [
-      "sudo apt-get update"
-      ]
-}
   provisioner "shell" {
-    inline = [
-      "sudo apt install -y ubuntu-desktop",
-      "sudo apt install -y gnome-panel gnome-settings-daemon metacity nautilus gnome-terminal"
-      ]
+    script = "install_ubuntu_desktop.sh"
 }
 }
