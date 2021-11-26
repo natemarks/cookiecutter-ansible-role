@@ -37,7 +37,7 @@ molecule-test: ## Run molecule
 	   pip install ansible yamllint ansible-lint molecule \
 		 molecule-docker molecule-ec2; \
 		 bash scripts/generate_env.sh; \
-	   . ./.env && molecule test; \
+	   . ./.env && molecule test --all; \
     )
 
 molecule-converge: ## Run molecule
