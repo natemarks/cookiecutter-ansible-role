@@ -1,17 +1,9 @@
-packer {
-  required_plugins {
-    amazon = {
-      version = ">= 1.0.4"
-      source  = "github.com/hashicorp/amazon"
-    }
-  }
-}
-
 source "amazon-ebs" "ubuntu" {
   ami_name      = "ansible-test-arole_{{ cookiecutter.role_name }}"
   instance_type = "t2.micro"
   region        = "us-east-1"
   vpc_id = "{{ cookiecutter.vpc_id }}"
+  subnet_id = "{{ cookiecutter.subnet_id }}"
   source_ami_filter {
     filters = {
       name                = "ubuntu/images/*ubuntu-focal-20.04-amd64-server-*"
