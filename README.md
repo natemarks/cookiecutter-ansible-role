@@ -61,4 +61,6 @@ tree
     └── vars
 
 16 directories, 16 files
+cd arole_ghj
+make clean-venv && make molecule-test
 ```
