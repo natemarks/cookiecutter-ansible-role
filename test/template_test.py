@@ -35,5 +35,5 @@ class TestClass:  # pylint: disable=R0903
         )
         assert ccinput["role_name"].upper() == expected["upper"]
         assert host.file(
-            str(tmp_path) + "/" + "arole_" + ccinput["role_name"]
+            str(tmp_path) + "/" + "arole-" + ccinput["role_name"]
         ).exists

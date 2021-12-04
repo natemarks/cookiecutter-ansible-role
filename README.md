@@ -27,7 +27,7 @@ galaxy_tag_3 [example_tag3]:
 
 tree
 .
-└── arole_ghj
+└── arole-ghj
     ├── Makefile
     ├── defaults
     │   └── main.yml
@@ -61,6 +61,6 @@ tree
     └── vars
 
 16 directories, 16 files
-cd arole_ghj
+cd arole-ghj
 make clean-venv && make molecule-test
 ```
