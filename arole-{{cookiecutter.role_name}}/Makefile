@@ -35,7 +35,7 @@ molecule-test: ## Run molecule
 	( \
 	   . .venv/bin/activate; \
 	   pip install ansible yamllint ansible-lint molecule \
-		 molecule-docker molecule-ec2; \
+		 boto3 molecule-docker molecule-ec2; \
 		 bash scripts/generate_env.sh; \
 	   . ./.env && molecule test --all; \
     )
