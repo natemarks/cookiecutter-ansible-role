@@ -109,7 +109,7 @@
           - platform.security_groups is sequence
           - platform.ssh_user is string and platform.ssh_user | length > 0
           - platform.ssh_port is integer and platform.ssh_port in range(1, 65536)
-          - platform.tags is mapping
+          - platform.tags is sequence
           - platform.volumes is sequence
           - platform.vpc_id is string
           - platform.vpc_subnet_id is string and platform.vpc_subnet_id | length > 0
