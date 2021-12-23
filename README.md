@@ -14,8 +14,9 @@ python3 -m venv .venv
 . .venv/bin/activate
 pip install --upgrade pip setuptools cookiecutter
 cookiecutter gh:natemarks/cookiecutter-ansible-role
-
-role_name [my_role]: ghj
+❯ cookiecutter gh:natemarks/cookiecutter-ansible-role
+You've downloaded /Users/nmarks/.cookiecutters/cookiecutter-ansible-role before. Is it okay to delete and re-download it? [yes]:
+role_name [my_role]: ttt
 github_user [natemarks]:
 author [Nate Marks]:
 ansible_version [4.4.0]:
@@ -24,43 +25,30 @@ ansible_lint_version [5.1.2]:
 galaxy_tag_1 [example_tag1]:
 galaxy_tag_2 [example_tag2]:
 galaxy_tag_3 [example_tag3]:
+vpc_id [vpc-xxx]: vpc-07c33af8d72120e2f
+subnet_id [subnet-xxx]: subnet-004abac234ef4680f
+ami_id [ami-xxx]: ami-01f64789ff539c77a
+❯ cd arole-ttt
+❯ make clean-venv
 
-tree
-.
-└── arole-ghj
-    ├── Makefile
-    ├── defaults
-    │   └── main.yml
-    ├── env.example
-    ├── files
-    ├── handlers
-    ├── meta
-    │   └── main.yml
-    ├── molecule
-    │   └── default
-    │       ├── converge.yml
-    │       ├── example_requirements.yml
-    │       ├── group_vars
-    │       ├── host_vars
-    │       │   ├── ubuntu20.04-all
-    │       │   └── ubuntu20.04-only-ac
-    │       ├── hosts
-    │       ├── molecule.yml
-    │       └── tests
-    │           └── test_default.py
-    ├── playbook
-    ├── scripts
-    │   └── generate_env.sh
-    ├── tasks
-    │   └── main.yml
-    ├── templates
-    │   └── tmp_version_file.j2
-    ├── tests
-    │   ├── inventory
-    │   └── test.yml
-    └── vars
+# export AWS configuration environment variables
+# AWS_ACCESS_KEY_ID=...
+# AWS_SECRET_ACCESS_KEY=...
+# NOTE: molecule-ec2 will fail if you use an AWS account that does not have a default VPC
+# https://github.com/ansible-community/molecule-ec2/issues/56
 
-16 directories, 16 files
-cd arole-ghj
+# initialize your git repo
+git init .
+git add -A
+git commit -am 'initial'
+
+# these should run successfully
 make clean-venv && make molecule-test
 ```
+
+## Contributors
+
+Many thanks to our contributor!
+
+[Kyle Hughes](https://github.com/Hugh472)
+
