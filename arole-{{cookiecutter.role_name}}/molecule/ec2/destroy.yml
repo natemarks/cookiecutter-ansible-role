@@ -138,4 +138,4 @@
         index_var: index
         label: "{{ item.name }}"
       when: item.key_inject_method == "ec2"
-{% -endraw %}
+{% endraw -%}

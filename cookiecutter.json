@@ -8,6 +8,7 @@
   "galaxy_tag_1": "example_tag1",
   "galaxy_tag_2": "example_tag2",
   "galaxy_tag_3": "example_tag3",
+  "vpc_id": "vpc-xxx",
   "subnet_id": "subnet-xxx",
   "ami_id": "ami-xxx"
 }

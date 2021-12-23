@@ -318,4 +318,4 @@
           pause:
             seconds: "{{ platforms | map(attribute='boot_wait_seconds') | max }}"
       when: ec2_instances_async is changed
-{%- endraw %}
+{% endraw -%}
