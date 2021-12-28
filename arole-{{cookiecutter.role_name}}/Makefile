@@ -34,8 +34,7 @@ roles:  clean-venv ## install ansible roles from galaxy
 molecule-test: ## Run molecule
 	( \
 	   . .venv/bin/activate; \
-	   pip install ansible yamllint ansible-lint molecule \
-		 boto boto3 molecule-docker molecule-ec2; \
+	   pip install -r requirements.txt; \
 		 bash scripts/generate_env.sh; \
 	   . ./.env && molecule test --all; \
     )
@@ -43,8 +42,7 @@ molecule-test: ## Run molecule
 molecule-converge: ## Run molecule
 	( \
 	   . .venv/bin/activate; \
-	   pip install ansible yamllint ansible-lint molecule \
-		 molecule-docker molecule-ec2; \
+	   pip install -r requirements.txt; \
 		 bash scripts/generate_env.sh; \
 	   . ./.env && molecule converge; \
     )
