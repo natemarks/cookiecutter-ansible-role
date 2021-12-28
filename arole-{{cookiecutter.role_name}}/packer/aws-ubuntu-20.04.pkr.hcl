@@ -2,8 +2,8 @@ source "amazon-ebs" "ubuntu" {
   ami_name      = "ansible-test-arole-{{ cookiecutter.role_name }}-{{ "{{" }}timestamp{{ "}}" }}"
   instance_type = "t2.micro"
   region        = "us-east-1"
-  vpc_id = "{{ cookiecutter.vpc_id }}"
-  subnet_id = "{{ cookiecutter.subnet_id }}"
+  vpc_id = "{{env `VPC_ID`}}"
+  subnet_id = "{{env `SUBNET_ID`}}"
   source_ami_filter {
     filters = {
       name                = "ubuntu/images/*ubuntu-focal-20.04-amd64-server-*"
