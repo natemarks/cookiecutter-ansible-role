@@ -1,3 +1,4 @@
+{% raw -%}
 source "amazon-ebs" "ubuntu" {
   ami_name      = "ansible-test-arole-{{ cookiecutter.role_name }}-{{ "{{" }}timestamp{{ "}}" }}"
   instance_type = "t2.micro"
@@ -28,3 +29,4 @@ build {
     script = "install_ubuntu_desktop.sh"
 }
 }
+{% endraw -%}
