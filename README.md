@@ -1,5 +1,8 @@
-Cookiecutter template for ansible role projects
+Cookiecutter template for ansible role projects that us molecule for testing. Molecule is adequate for many server  tests, but if you need to test roles on complex multi-user graphical desktop  hosts, please use this template instead: 
 
+https://github.com/natemarks/cookiecutter-arole-packer
+
+## Overview
  - Setup a minimal project structure
  - get molecule linting and test working immediately
  - use .env to provide secure variables to test runs without leaking into the repo
