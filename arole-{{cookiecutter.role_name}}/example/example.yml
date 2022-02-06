@@ -1,0 +1,6 @@
+---
+- name: Example playbook
+  hosts: localhost
+  become: false
+  roles:
+    - role: "arole-{{ cookiecutter.role_name }}"

@@ -1,0 +1,6 @@
+# requirements.yml
+# this example assumes that the role requires a the awscli_v2 role
+---
+- name: natemarks.awscli_v2
+  src: https://github.com/natemarks/ansible-role-awscli_v2
+  version: v0.0.3

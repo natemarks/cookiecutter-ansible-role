@@ -36,7 +36,7 @@ undo_edits: ## undo staged and unstaged change. ohmyzsh alias: grhh
 rebase: git-status ## rebase current feature branch on to the default branch
 	git fetch && git rebase origin/$(DEFAULT_BRANCH)
 
-test: git-status static ## Run all project tests
+test: static ## Run all project tests
 	( \
        . .venv/bin/activate; \
        python3 -m pytest -o log_cli=true -v test; \

@@ -19,3 +19,6 @@ kinds:
   # - vars: "**/vars/*.yml"
   # - meta: "**/meta/main.yml"
   - yaml: "**/*.yaml"
+skip_list:
+  - 'yaml'
+  - 'role-name'
