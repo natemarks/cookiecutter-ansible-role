@@ -1,4 +1,4 @@
-Cookiecutter template for ansible role projects that us molecule for testing. Molecule is adequate for many server  tests, but if you need to test roles on complex multi-user graphical desktop  hosts, please use this template instead: 
+Cookiecutter template for ansible role projects that us molecule-docker for testing. Molecule-docker is adequate for testing roles that only get installed on simple host configurations, but if you need to test roles on complex multi-user graphical desktop  hosts, please use this template instead: 
 
 https://github.com/natemarks/cookiecutter-arole-packer
 
